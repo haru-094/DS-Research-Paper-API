@@ -18,11 +18,18 @@
                 <input type="text" id="search-input" placeholder="type what you want to serarch">
             </div>
             <div class="filter-dropdown">
-
+                <select id="select-sorting">
+                    <option value="cited_by_count">Most cited</option>
+                    <option value="publication_year">Latest First</option>
+                </select>
+                <label>
+                    <input type="checkbox" id="open-source" checked>
+                    Open Source Only (Free)
+                </label>
             </div>
             <button id="search-btn">Search</button>
         </section>
-        <section class="data-retrieval">
+        <section id="getting-data" class="data-retrieval">
             <p>The result</p>
         </section>
     </main>
