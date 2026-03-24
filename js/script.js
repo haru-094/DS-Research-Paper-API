@@ -13,13 +13,19 @@ search_btn.addEventListener('click', () => {
     }
 
     result_container.innerHTML = '<p>Fetching data science research...</p>';
-    fetchResearch(query);
+    fetch_research_data(query);
 });
 
-async function fetchResearch(query) {
+search_input.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        search_btn.click();
+    }
+});
+
+async function fetch_research_data(query) {
     try {
         const baseUrl = 'https://api.openalex.org/works';
-
         let filters = 'concepts.id:C119857082';
 
         if (open_source.checked) {
@@ -27,21 +33,30 @@ async function fetchResearch(query) {
         }
 
         let sort_method = sort_select.value + ':desc';
-
         const finalUrl = `${baseUrl}?search=${encodeURIComponent(query)}&filter=${filters}&sort=${sort_method}&per-page=12`;
 
         const response = await fetch(finalUrl);
-        const data = await response.json();
 
-        displayResults(data.results);
+        if (!response.ok) {
+            if (response.status === 429) {
+                throw new Error("Rate limit reached. Please wait a moment and try again.");
+            } else if (response.status >= 500) {
+                throw new Error("The OpenAlex database is currently down. Please try again later.");
+            } else {
+                throw new Error("Something went wrong with the search connection.");
+            }
+        }
+
+        const data = await response.json();
+        getting_result(data.results);
 
     } catch (error) {
         console.error("Error:", error);
-        result_container.innerHTML = '<p>Error connecting to the database. Please try again.</p>';
+        result_container.innerHTML = `<div class="alert-danger">${error.message}</div>`;
     }
 }
 
-function displayResults(papers) {
+function getting_result(papers) {
     result_container.innerHTML = '';
 
     if (papers.length === 0) {
