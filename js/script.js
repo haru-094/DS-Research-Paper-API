@@ -89,23 +89,3 @@ function getting_result(papers) {
     result_container.innerHTML += paperCard;
   });
 }
-
-// no
-const load_balancer = document
-  .querySelector("load_balancer")
-  .getAttribute("load-balancer");
-if (!load_balancer) {
-  console.log("load balancer not working");
-} else {
-  console.log("load balancer is working and the api is vaild");
-}
-
-const web_sever = document
-  .querySelector("web-server")
-  .addEventListener("click", function () {
-    if (web_sever) {
-      console.log("your in web server");
-    } else {
-      console.log("your not in the web server");
-    }
-  });
