@@ -5,7 +5,7 @@
 
 A responsive, high-performance web application designed to query the OpenAlex API and retrieve highly relevant, open-access academic literature strictly focused on Data Science and Machine Learning. This project demonstrates modern frontend performance optimization and a high-availability deployment architecture using Nginx.
 
-##🚀 Features
+## 🚀 Features
 - Targeted Querying: Filters out unrelated disciplines to focus purely on ML/AI research (Concept ID: C119857082).
 
 - Performance Optimization (Caching): Implements a pure-JavaScript localStorage caching mechanism. Repeated queries load instantly from the browser's memory, eliminating redundant API calls and preventing rate-limit errors.
